@@ -20,6 +20,16 @@ In **Codex**, start with:
 
 In **Claude Code**, invoke `/easy-voice` with the same brief. With another MCP-capable coding agent, load `SKILL.md` using its skills mechanism. The local build needs no provider credentials.
 
+## First-use connection check
+
+The first time you use Easy Voice in a coding session, it checks account access through both MCP servers. If one needs setup, it asks whether to connect that account now or continue locally. Once you connect, it retries the affected service and resumes your request. You can also ask directly:
+
+> Use $easy-voice to check my Retell and n8n connections.
+
+Retell is checked with a read of the workspace's concurrency settings. n8n is checked by requesting a single workflow; an empty workspace passes. For an offline example, say “build this locally.” [Setup and probe details](skills/easy-voice/references/mcp.md).
+
+**Optional terminal check.** In a clone, `npm run connections` checks credentials supplied through your shell. For authenticated reads, first run `npm install --prefix skills/easy-voice/diagnostics --ignore-scripts --no-audit --no-fund`. Use `npm run connections -- --only n8n` to retry one service, or `--json` for status output. `npm run connections -- --setup codex` or `--setup claude-code` prints configuration with environment-variable references. The coding agent uses its own configured connections and needs none of these terminal steps.
+
 ## Try it in a minute
 
 ```sh
@@ -52,7 +62,7 @@ All four bundled workflows passed runtime-profile validation with n8n-mcp 2.94.2
 
 ## Connect real services
 
-[Connect Retell MCP and n8n MCP](skills/easy-voice/references/mcp.md), then ask:
+Once the account checks pass, ask:
 
 > Use $easy-voice to provision this blueprint as drafts in my staging workspace. Validate each n8n workflow, bind the Retell engine, read back the IDs and report what is ready to test.
 
