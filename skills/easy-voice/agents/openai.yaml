@@ -1,0 +1,4 @@
+interface:
+  display_name: "Easy Voice"
+  short_description: "Build Retell voice agents with n8n tool workflows"
+  default_prompt: "Use $easy-voice to build a Retell voice agent and its n8n automations from my brief."

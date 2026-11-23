@@ -1,0 +1,26 @@
+{
+  "slug": "order-desk",
+  "name": "Juniper Order Desk",
+  "greeting": "Hello from Juniper. What is your demo order reference?",
+  "instructions": "You answer questions about fictional orders. Ask for the order reference, use the lookup tool, and report only the state it returns. For an unknown reference ask the caller to check it, then offer a human contact if unresolved.",
+  "tools": [
+    {
+      "name": "lookup_order",
+      "description": "Look up a fictional order by its reference.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "The order reference, such as J-104."
+          }
+        },
+        "required": [
+          "reference"
+        ],
+        "additionalProperties": false
+      },
+      "handler": "lookup-order.js"
+    }
+  ]
+}

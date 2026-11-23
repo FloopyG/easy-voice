@@ -1,0 +1,16 @@
+{
+  "name": "easy-voice",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Build a Retell voice agent and its n8n tool workflows from one brief.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "demo": "node demo.mjs",
+    "test": "node --test test/stack.test.mjs",
+    "build:demo": "node skills/easy-voice/scripts/build.mjs skills/easy-voice/assets/service-desk/stack.json --out build"
+  },
+  "license": "MIT"
+}

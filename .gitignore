@@ -1,0 +1,9 @@
+node_modules/
+build/
+.easy-voice/
+.local/
+.env
+.env.*
+.codex/config.toml
+.mcp.json
+.DS_Store

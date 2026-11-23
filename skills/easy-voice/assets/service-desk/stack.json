@@ -1,0 +1,63 @@
+{
+  "slug": "service-desk",
+  "name": "Harbor Service Desk",
+  "greeting": "Thanks for calling Harbor Repairs. What can I help you with?",
+  "instructions": "You are the fictional Harbor Repairs receptionist. Give short spoken answers. Look up each service before quoting it. If a service is unknown, say so and offer a person. Read back the reason and reference before preparing a callback. A draft means the request is prepared for review; nobody has been notified.",
+  "afterCall": {
+    "event": "call_analyzed",
+    "includeSummary": true,
+    "handler": "after-call.js"
+  },
+  "tools": [
+    {
+      "name": "lookup_service",
+      "description": "Get a service and its estimated duration from the demo catalog.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string",
+            "description": "Service the caller asked about, e.g. brake check."
+          }
+        },
+        "required": [
+          "service"
+        ],
+        "additionalProperties": false
+      },
+      "handler": "lookup-service.js"
+    },
+    {
+      "name": "prepare_callback",
+      "description": "Prepare a callback request for review after the caller confirms. This demo does not contact anyone.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "Non-personal job reference supplied by the caller."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Which team should review it?",
+            "enum": [
+              "repair",
+              "billing"
+            ]
+          }
+        },
+        "required": [
+          "reference",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "confirm": true,
+      "keyFields": [
+        "reference",
+        "reason"
+      ],
+      "graph": "callback-graph.json"
+    }
+  ]
+}

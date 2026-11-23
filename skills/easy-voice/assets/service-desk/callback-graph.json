@@ -1,0 +1,45 @@
+{
+  "entry": "Choose team",
+  "exit": "Prepare draft",
+  "nodes": [
+    {
+      "name": "Choose team",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        690,
+        -80
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const team = $json.args.reason === \"billing\" ? \"accounts\" : \"service\";\nreturn { json: { ...$json, team } };"
+      }
+    },
+    {
+      "name": "Prepare draft",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        900,
+        -80
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "return { json: { status: \"draft\", team: $json.team, reference: $json.args.reference, idempotency_key: $json.idempotency_key } };"
+      }
+    }
+  ],
+  "connections": {
+    "Choose team": {
+      "main": [
+        [
+          {
+            "node": "Prepare draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
